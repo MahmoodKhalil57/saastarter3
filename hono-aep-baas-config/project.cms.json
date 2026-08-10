@@ -138,7 +138,19 @@
         "ar"
       ]
     },
-    "url": "https://mahmoodkhalil57.github.io/saastarter3"
+    "url": "https://mahmoodkhalil57.github.io/saastarter3",
+    "services": {
+      "payment": {
+        "provider": "stripe"
+      },
+      "delivery": {
+        "provider": "download"
+      },
+      "email": {
+        "provider": "resend",
+        "from": "saastarter3 <shop@example.com>"
+      }
+    }
   },
   "update_time": "2026-08-08T02:08:28Z"
 }
