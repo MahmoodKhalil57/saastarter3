@@ -1,5 +1,5 @@
 {
-  "$schema": "https://mizan-gpp.the-montiapple.workers.dev/v1/schemas/collection-config.json",
+  "$schema": "https://bastarter.the-montiapple.workers.dev/v1/schemas/collection-config.json",
   "definition": {
     "singular": "discount",
     "plural": "discounts",

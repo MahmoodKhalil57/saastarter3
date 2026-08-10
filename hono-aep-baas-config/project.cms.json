@@ -1,5 +1,5 @@
 {
-  "$schema": "https://mizan-gpp.the-montiapple.workers.dev/v1/schemas/project-config.json",
+  "$schema": "https://bastarter.the-montiapple.workers.dev/v1/schemas/project-config.json",
   "auth_pool": {
     "anonymous": {
       "enabled": true
@@ -59,7 +59,7 @@
         {
           "purpose": "any maskable",
           "sizes": "any",
-          "src": "https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/site/favicon.svg",
+          "src": "https://bastarter.the-montiapple.workers.dev/v1/projects/saastarter3/site/favicon.svg",
           "type": "image/svg+xml"
         }
       ],
@@ -85,7 +85,7 @@
           {
             "note": "the AEP contract this whole site is generated from",
             "title": "API contract",
-            "url": "https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/openapi.json"
+            "url": "https://bastarter.the-montiapple.workers.dev/v1/projects/saastarter3/openapi.json"
           }
         ],
         "sections": [

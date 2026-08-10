@@ -1,6 +1,6 @@
 {
-  "$schema": "https://mizan-gpp.the-montiapple.workers.dev/v1/schemas/seed-config.json",
-  "endpoint": "https://mizan-gpp.the-montiapple.workers.dev",
+  "$schema": "https://bastarter.the-montiapple.workers.dev/v1/schemas/seed-config.json",
+  "endpoint": "https://bastarter.the-montiapple.workers.dev",
   "project": "saastarter3",
   "resources": [
     "discounts/*.json",
