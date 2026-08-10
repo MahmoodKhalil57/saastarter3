@@ -1,7 +1,8 @@
 {
   "$schema": "https://mizan-gpp.the-montiapple.workers.dev/v1/schemas/baas-config.json",
   "endpoint": "https://mizan-gpp.the-montiapple.workers.dev",
-  "project": "bastarter/projects/saastarter3",
+  "project": "saastarter3",
+  "base": "https://api.saastarter3.saastemly.com",
   "resources": [
     "forms/*.cms.json",
     "themes/*.cms.css",
