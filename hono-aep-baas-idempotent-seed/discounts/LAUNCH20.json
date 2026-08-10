@@ -1,5 +1,5 @@
 {
-  "$schema": "https://bastarter.the-montiapple.workers.dev/v1/projects/saastarter3/schemas/rows/discounts.json",
+  "$schema": "https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/schemas/rows/discounts.json",
   "kind": "percent",
   "min_cents": 1000,
   "value": 20

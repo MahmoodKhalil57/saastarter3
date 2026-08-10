@@ -1,5 +1,5 @@
 {
-  "$schema": "https://bastarter.the-montiapple.workers.dev/v1/projects/saastarter3/schemas/rows/products.json",
+  "$schema": "https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/schemas/rows/products.json",
   "category": "plugin",
   "description": {
     "ar": "نوع الفوترة: الكتالوج والاستحقاقات والدفع عبر سترايب مع الويب هوك.",

@@ -1,5 +1,5 @@
 {
-  "$schema": "https://bastarter.the-montiapple.workers.dev/v1/schemas/seed-user.json",
+  "$schema": "https://mizan-gpp.the-montiapple.workers.dev/v1/schemas/seed-user.json",
   "email": "demo@saastarter2.test",
   "name": "Demo Customer",
   "password": {

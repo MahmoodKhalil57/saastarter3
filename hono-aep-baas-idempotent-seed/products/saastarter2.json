@@ -1,5 +1,5 @@
 {
-  "$schema": "https://bastarter.the-montiapple.workers.dev/v1/projects/saastarter3/schemas/rows/products.json",
+  "$schema": "https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/schemas/rows/products.json",
   "category": "starter",
   "description": {
     "ar": "المستودع نفسه الذي يبني هذا المتجر — متكامل، مع سترايب والتجارة ولوحة الإدارة.",
