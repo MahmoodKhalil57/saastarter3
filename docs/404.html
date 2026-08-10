@@ -6,7 +6,7 @@
     <script>
       // Old SPA-route compatibility: /products/x → product?slug=x, etc.
       const parts = location.pathname
-        .replace(/^\/saastarter2\/?/, "")
+        .replace(/^\/saastarter3\/?/, "")
         .split("/")
         .filter(Boolean);
       const [head, tail] = parts;
@@ -21,7 +21,7 @@
           "https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/site/admin.html",
         contact: "contact",
       };
-      location.replace("/saastarter2/" + (map[head] ?? (head ? `page?slug=${encodeURIComponent(head)}` : "")));
+      location.replace("/saastarter3/" + (map[head] ?? (head ? `page?slug=${encodeURIComponent(head)}` : "")));
     </script>
   </head>
   <body>

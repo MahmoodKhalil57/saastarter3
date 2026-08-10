@@ -12,7 +12,7 @@ if (slug)
 const p = await product(slug);
 if (!p) detail.innerHTML = '<p>Not found. <a href="./products">Back to catalog</a></p>';
 else {
-  document.title = `${p.name} — saastarter2 pure`;
+  document.title = `${p.name} — saastarter3 pure`;
   void track("product_viewed", { product_id: p.slug, price_cents: p.price_cents });
   const wished = (await myWishlist()).some((w) => w.product === slug);
   detail.innerHTML = `

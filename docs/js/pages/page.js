@@ -38,7 +38,7 @@ if (!response.ok) {
   mount.innerHTML = '<p>Page not found. <a href="./">Home</a></p>';
 } else {
   const doc = await response.json();
-  document.title = `${doc.title} — saastarter2`;
+  document.title = `${doc.title} — saastarter3`;
   const content = doc.data?.content ?? [];
   mount.replaceChildren(
     ...content.map((block) => {
