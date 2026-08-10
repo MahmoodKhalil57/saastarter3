@@ -1,0 +1,144 @@
+{
+  "$schema": "https://mizan-gpp.the-montiapple.workers.dev/v1/schemas/project-config.json",
+  "auth_pool": {
+    "anonymous": {
+      "enabled": true
+    },
+    "emailPassword": {
+      "enabled": true
+    },
+    "social": {
+      "google": {
+        "clientId": {
+          "$env": "GOOGLE_CLIENT_ID"
+        },
+        "clientSecret": {
+          "$env": "GOOGLE_CLIENT_SECRET"
+        }
+      }
+    },
+    "trustedOrigins": [
+      "https://mahmoodkhalil57.github.io"
+    ],
+    "twoFactor": {
+      "enabled": true,
+      "issuer": "saastarter2"
+    }
+  },
+  "create_time": "2026-08-08T02:08:28Z",
+  "created_by": "Jvk6Uk2lHfwlfOqv76sZPPz7kzApRuMA",
+  "display_name": "saastarter3",
+  "site": {
+    "admin": {
+      "collections": [
+        {
+          "idField": "slug",
+          "media": [
+            "file"
+          ],
+          "slug": "products"
+        },
+        {
+          "slug": "discounts"
+        },
+        {
+          "idField": "slug",
+          "slug": "posts"
+        },
+        {
+          "slug": "reviews"
+        }
+      ],
+      "commerce": true
+    },
+    "app": {
+      "backgroundColor": "#0a0a0a",
+      "cacheName": "pure-v1",
+      "favicon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 32 32\"><rect width=\"32\" height=\"32\" rx=\"7\" fill=\"#0a0a0a\"/><text x=\"16\" y=\"22\" font-family=\"ui-sans-serif,system-ui,sans-serif\" font-size=\"18\" font-weight=\"700\" fill=\"#fafafa\" text-anchor=\"middle\">s2</text></svg>",
+      "icons": [
+        {
+          "purpose": "any maskable",
+          "sizes": "any",
+          "src": "https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/site/favicon.svg",
+          "type": "image/svg+xml"
+        }
+      ],
+      "name": "saastarter3",
+      "shortName": "SaaS2",
+      "themeColor": "#0a0a0a",
+      "accentColor": "#d9482b"
+    },
+    "assets": {
+      "og": {
+        "posts": {
+          "title": "title"
+        },
+        "products": {
+          "money": "price_cents",
+          "subtitle": "tagline",
+          "title": "name"
+        }
+      },
+      "llms": {
+        "intro": "No build step: the deployed files ARE the source. View source on any page.",
+        "links": [
+          {
+            "note": "the AEP contract this whole site is generated from",
+            "title": "API contract",
+            "url": "https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/openapi.json"
+          }
+        ],
+        "sections": [
+          {
+            "collection": "products",
+            "label": "name",
+            "note": "tagline",
+            "title": "Products",
+            "url": "/product.html?slug={id}"
+          },
+          {
+            "collection": "posts",
+            "label": "title",
+            "title": "Blog",
+            "url": "/post.html?slug={id}"
+          }
+        ]
+      },
+      "robots": {
+        "extra": [
+          "Disallow: /admin.html"
+        ]
+      },
+      "sitemap": {
+        "collections": [
+          {
+            "slug": "products",
+            "url": "/product.html?slug={id}"
+          },
+          {
+            "slug": "posts",
+            "url": "/post.html?slug={id}"
+          }
+        ],
+        "urls": [
+          "/",
+          "/products.html",
+          "/blog.html",
+          "/contact.html",
+          "/page.html?slug=story"
+        ]
+      }
+    },
+    "description": "saastarter2's twin, provisioned through the bastarter white-label \u2014 same executor, a bastarter customer's child project.",
+    "locale": "en",
+    "locales": {
+      "default": "en",
+      "supported": [
+        "en",
+        "ar"
+      ]
+    },
+    "url": "https://mahmoodkhalil57.github.io/saastarter3"
+  },
+  "update_time": "2026-08-08T02:08:28Z"
+}

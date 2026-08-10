@@ -1,0 +1,17 @@
+{
+  "$schema": "https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/schemas/rows/products.json",
+  "category": "theme",
+  "description": {
+    "ar": "عشرة أنظمة ألوان مع الوضع الداكن كسمات مستضافة — وسم رابط واحد.",
+    "en": "Ten color schemes + dark mode as hosted themes — one link tag."
+  },
+  "featured": false,
+  "file": "2cb94328-88c4-4ae6-be29-144b4cbcc8c3",
+  "name": "tweakcn Theme Pack",
+  "price_cents": 2900,
+  "slug": "tweakcn-theme",
+  "tagline": {
+    "ar": "سمات tweakcn مستضافة.",
+    "en": "Hosted tweakcn themes."
+  }
+}

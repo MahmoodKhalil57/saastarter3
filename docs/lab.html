@@ -1,0 +1,192 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>component lab — saastarter2</title>
+    <meta name="robots" content="noindex" />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/site/favicon.svg"
+    />
+    <script>
+      {
+        const d = localStorage.theme === "dark",
+          c = document.documentElement.classList;
+        c.toggle("wa-dark", d);
+        c.toggle("dark", d);
+        const l = localStorage.locale === "ar" ? "ar" : "en";
+        document.documentElement.lang = l;
+        document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+      }
+    </script>
+    <script type="importmap">
+      {
+        "imports": {
+          "#baas-config": "./js/config.js",
+          "#stores": "./js/stores.js",
+          "#wa-core": "./js/wa-core.gen.js",
+          "baas/": "https://cdn.jsdelivr.net/gh/MahmoodKhalil57/hono-aep-baas-client@v0.1.0/src/",
+          "devgit/": "https://cdn.jsdelivr.net/gh/MahmoodKhalil57/hono-aep-devgit@v0.1.2/src/",
+          "htm": "https://esm.sh/htm@3.1.1?target=es2022",
+          "idiomorph": "https://cdn.jsdelivr.net/gh/bigskysoftware/idiomorph@v0.7.4/dist/idiomorph.esm.js",
+          "nanostores": "https://esm.sh/nanostores@1.4.2?target=es2022",
+          "react": "https://esm.sh/react@19.2.8?target=es2022",
+          "react-dom/client": "https://esm.sh/react-dom@19.2.8/client?target=es2022&deps=react@19.2.8",
+          "react-jit/": "https://cdn.jsdelivr.net/gh/MahmoodKhalil57/hono-aep-react-jit@v0.1.0/src/",
+          "wa/": "https://cdn.jsdelivr.net/npm/@awesome.me/webawesome@3.11.0/dist-cdn/"
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://mizan-gpp.the-montiapple.workers.dev" />
+    <link rel="stylesheet" href="./css/webawesome.flat.gen.css" />
+    <link
+      rel="stylesheet"
+      href="https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/theme.css"
+    />
+    <link rel="stylesheet" href="./css/theme-bridge.css" />
+    <link rel="stylesheet" href="./css/site.css" />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@awesome.me/webawesome@3.11.0/dist-cdn/webawesome.loader.js"
+    ></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
+    <link rel="modulepreload" href="./js/chrome.js" />
+    <link rel="modulepreload" href="./js/stores.js" />
+    <link rel="modulepreload" href="./js/api.js" />
+    <link rel="modulepreload" href="./js/config.js" />
+    <script type="module" src="./js/wa-core.gen.js"></script>
+    <script type="module" src="./js/chrome.js"></script>
+  </head>
+  <body>
+    <s2-nav>
+      <!-- SYNC: this markup is duplicated on every page so the chrome renders
+           before any JavaScript. The behaviour that enhances it (and the
+           fallback copy, if this is ever missing) lives in
+           js/components/nav.js — change one, change both.
+           Find every copy with:  grep -l s2-nav-row docs/*.html -->
+      <div class="container s2-nav-row">
+        <a class="s2-brand" href="./">
+          saastarter2
+          <small>pure</small>
+        </a>
+        <a href="./products">
+          <iconify-icon icon="lucide:package" inline></iconify-icon>
+          Products
+        </a>
+        <a href="./blog">
+          <iconify-icon icon="lucide:file-text" inline></iconify-icon>
+          Blog
+        </a>
+        <a href="#cart" id="nav-cart">
+          <iconify-icon icon="lucide:shopping-cart" inline></iconify-icon>
+          Cart
+          <span id="cart-count" class="s2-badge s2-hidden"></span>
+        </a>
+        <a href="./login" id="nav-account">
+          <iconify-icon icon="lucide:log-in" inline></iconify-icon>
+          Sign in
+        </a>
+        <button id="theme-toggle" aria-label="Toggle dark mode">
+          <iconify-icon class="s2-when-light" icon="lucide:moon" inline></iconify-icon>
+          <iconify-icon class="s2-when-dark" icon="lucide:sun" inline></iconify-icon>
+        </button>
+        <button id="locale-toggle" aria-label="Switch language">
+          <iconify-icon icon="lucide:languages" inline></iconify-icon>
+          <span class="s2-mono">ع</span>
+        </button>
+      </div>
+    </s2-nav>
+    <main class="container" style="max-inline-size: 44rem">
+      <p class="s2-kicker" style="margin-block-end: 0.25rem">component lab</p>
+      <h1 style="margin-block: 0 0.25rem">Five engines, one atom</h1>
+      <p class="s2-comment" style="margin-block: 0 1.5rem">
+        /* every row binds to the same nanostores atom — $counter from #stores */
+      </p>
+
+      <div class="s2-stack">
+        <wa-card><s2-counter-lit></s2-counter-lit></wa-card>
+        <wa-card><s2-counter-svelte></s2-counter-svelte></wa-card>
+        <wa-card><s2-counter-vue></s2-counter-vue></wa-card>
+        <wa-card><s2-counter-react></s2-counter-react></wa-card>
+        <wa-card>
+          <s2-counter-jit>
+            <!-- pre-engine fallback: honest content until React arrives (or if it never does) -->
+            <div class="s2-row"><span class="s2-quiet s2-small">react-jit — waiting for the engine…</span></div>
+          </s2-counter-jit>
+        </wa-card>
+        <wa-card>
+          <div class="s2-stack">
+            <s2-price-slider min="0" max="200"></s2-price-slider>
+            <span class="s2-quiet s2-small">
+              Base UI (headless React, compound parts) wrapped as a custom element — behavior and a11y from the library,
+              markup and CSS ours, state in the shared atom.
+            </span>
+          </div>
+        </wa-card>
+        <wa-card>
+          <div class="s2-stack">
+            <div class="s2-motion-host" id="motion-host">
+              <strong>Live DOM, not a picture of it</strong>
+              <p class="s2-quiet s2-small" style="margin-block: 0.25rem 0.5rem">
+                This text stays selectable and the button stays focusable at every tier.
+              </p>
+              <wa-button size="s" appearance="outlined">Still a real button</wa-button>
+            </div>
+            <canvas id="motion-canvas" class="s2-hidden"></canvas>
+            <span class="s2-quiet s2-small" id="motion-tier">resolving tier…</span>
+          </div>
+        </wa-card>
+        <wa-card>
+          <div class="s2-row">
+            <strong class="s2-price" id="native-count"></strong>
+            <wa-button size="s" appearance="outlined" id="reset">Reset</wa-button>
+            <span class="s2-quiet s2-small">no engine at all — a plain module subscribing to the same atom</span>
+          </div>
+        </wa-card>
+      </div>
+
+      <section style="margin-block-start: 2rem">
+        <h2 style="font-size: 1.1rem">What this page proves</h2>
+        <p class="s2-quiet s2-small">
+          The first four counters are
+          <code>.gen.js</code>
+          artifacts compiled once in
+          <code>component-factory/</code>
+          (runtime bundled in: lit 15KB · svelte 52KB · vue 71KB · react 182KB, min). The fifth ships as source and
+          lazy-loads a shared React engine from the CDN on first connect — watch its fallback text until the engine
+          lands. All five import the same
+          <code>#stores</code>
+          module through the page import map, so one atom instance drives every engine.
+        </p>
+      </section>
+    </main>
+    <s2-footer>
+      <!-- SYNC: duplicated per page (see the note on <s2-nav>); the fallback
+           copy lives in js/components/footer.js — change one, change both. -->
+      static on GitHub Pages · backend on Cloudflare Workers ·
+      <a href="./contact">contact</a>
+      ·
+      <a href="./blog">blog</a>
+      ·
+      <a href="./admin">admin</a>
+    </s2-footer>
+    <script type="module">
+      import "./js/components/counter-lit.gen.js";
+      import "./js/components/counter-svelte.gen.js";
+      import "./js/components/counter-vue.gen.js";
+      import "./js/components/counter-react.gen.js";
+      import "./js/components/react-jit/counter.element.js";
+      import "./js/components/s2-price-slider.gen.js";
+      import "./js/lab-motion.js";
+      import { $counter } from "#stores";
+
+      $counter.subscribe((value) => {
+        document.getElementById("native-count").textContent = String(value);
+      });
+      document.getElementById("reset").addEventListener("click", () => $counter.set(0));
+    </script>
+  </body>
+</html>

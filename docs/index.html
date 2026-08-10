@@ -1,0 +1,268 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>saastarter3 — the white-labeled twin</title>
+    <meta
+      name="description"
+      content="An ecommerce shop that sells its own source code. Raw HTML + Web Awesome components over a declarative baas on Cloudflare Workers — no build step, no framework, no router."
+    />
+    <link
+      rel="icon"
+      type="image/svg+xml"
+      href="https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/site/favicon.svg"
+    />
+    <link
+      rel="manifest"
+      href="https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/site/manifest.webmanifest"
+      crossorigin="anonymous"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script>
+      {
+        const d = localStorage.theme === "dark",
+          c = document.documentElement.classList;
+        c.toggle("wa-dark", d);
+        c.toggle("dark", d);
+        const l = localStorage.locale === "ar" ? "ar" : "en";
+        document.documentElement.lang = l;
+        document.documentElement.dir = l === "ar" ? "rtl" : "ltr";
+      }
+    </script>
+    <script type="importmap">
+      {
+        "imports": {
+          "#baas-config": "./js/config.js",
+          "#stores": "./js/stores.js",
+          "#wa-core": "./js/wa-core.gen.js",
+          "baas/": "https://cdn.jsdelivr.net/gh/MahmoodKhalil57/hono-aep-baas-client@v0.1.0/src/",
+          "devgit/": "https://cdn.jsdelivr.net/gh/MahmoodKhalil57/hono-aep-devgit@v0.1.2/src/",
+          "htm": "https://esm.sh/htm@3.1.1?target=es2022",
+          "idiomorph": "https://cdn.jsdelivr.net/gh/bigskysoftware/idiomorph@v0.7.4/dist/idiomorph.esm.js",
+          "nanostores": "https://esm.sh/nanostores@1.4.2?target=es2022",
+          "react": "https://esm.sh/react@19.2.8?target=es2022",
+          "react-dom/client": "https://esm.sh/react-dom@19.2.8/client?target=es2022&deps=react@19.2.8",
+          "react-jit/": "https://cdn.jsdelivr.net/gh/MahmoodKhalil57/hono-aep-react-jit@v0.1.0/src/",
+          "wa/": "https://cdn.jsdelivr.net/npm/@awesome.me/webawesome@3.11.0/dist-cdn/"
+        }
+      }
+    </script>
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin />
+    <link rel="preconnect" href="https://mizan-gpp.the-montiapple.workers.dev" />
+    <link rel="stylesheet" href="./css/webawesome.flat.gen.css" />
+    <link
+      rel="stylesheet"
+      href="https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/theme.css"
+    />
+    <link rel="stylesheet" href="./css/theme-bridge.css" />
+    <link rel="stylesheet" href="./css/site.css" />
+    <script
+      type="module"
+      src="https://cdn.jsdelivr.net/npm/@awesome.me/webawesome@3.11.0/dist-cdn/webawesome.loader.js"
+    ></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/iconify-icon@2.1.0/dist/iconify-icon.min.js"></script>
+    <link rel="modulepreload" href="./js/chrome.js" />
+    <link rel="modulepreload" href="./js/stores.js" />
+    <link rel="modulepreload" href="./js/api.js" />
+    <link rel="modulepreload" href="./js/config.js" />
+    <script type="module" src="./js/wa-core.gen.js"></script>
+    <script type="module" src="./js/chrome.js"></script>
+    <meta
+      property="og:image"
+      content="https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/site/og.png"
+    />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://mahmoodkhalil57.github.io/saastarter3/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:image"
+      content="https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/site/og.png"
+    />
+  </head>
+  <body>
+    <s2-nav>
+      <!-- SYNC: this markup is duplicated on every page so the chrome renders
+           before any JavaScript. The behaviour that enhances it (and the
+           fallback copy, if this is ever missing) lives in
+           js/components/nav.js — change one, change both.
+           Find every copy with:  grep -l s2-nav-row docs/*.html -->
+      <div class="container s2-nav-row">
+        <a class="s2-brand" href="./">
+          saastarter2
+          <small>pure</small>
+        </a>
+        <a href="./products">
+          <iconify-icon icon="lucide:package" inline></iconify-icon>
+          Products
+        </a>
+        <a href="./blog">
+          <iconify-icon icon="lucide:file-text" inline></iconify-icon>
+          Blog
+        </a>
+        <a href="#cart" id="nav-cart">
+          <iconify-icon icon="lucide:shopping-cart" inline></iconify-icon>
+          Cart
+          <span id="cart-count" class="s2-badge s2-hidden"></span>
+        </a>
+        <a href="./login" id="nav-account">
+          <iconify-icon icon="lucide:log-in" inline></iconify-icon>
+          Sign in
+        </a>
+        <button id="theme-toggle" aria-label="Toggle dark mode">
+          <iconify-icon class="s2-when-light" icon="lucide:moon" inline></iconify-icon>
+          <iconify-icon class="s2-when-dark" icon="lucide:sun" inline></iconify-icon>
+        </button>
+        <button id="locale-toggle" aria-label="Switch language">
+          <iconify-icon icon="lucide:languages" inline></iconify-icon>
+          <span class="s2-mono">ع</span>
+        </button>
+      </div>
+    </s2-nav>
+    <main class="container">
+      <section class="s2-hero">
+        <p class="s2-kicker s2-reveal">the self-aware saas template</p>
+        <h1 class="s2-hero-title s2-reveal">
+          Ship fast.
+          <br />
+          Stay
+          <em>minimal.</em>
+        </h1>
+        <p class="s2-comment s2-reveal">/* the store you are looking at sells the repo that builds it */</p>
+        <p class="s2-quiet s2-reveal" style="max-inline-size: 34rem; margin-inline: auto; font-size: 1.1rem">
+          Raw HTML + Web Awesome components, no build step, no framework, no router — the browser is all four.
+          Everything hard lives in the hosted backend. View source; that's the whole app.
+        </p>
+        <div class="s2-row s2-reveal" style="justify-content: center; margin-block-start: 1.5rem">
+          <a href="./products">
+            <button class="s2-btn s2-btn-brand s2-btn-l" type="button">
+              <iconify-icon icon="lucide:package" inline></iconify-icon>
+              Browse products
+            </button>
+          </a>
+          <a href="./page?slug=story">
+            <button class="s2-btn s2-btn-outline s2-btn-l" type="button">
+              Our story
+              <iconify-icon icon="lucide:arrow-right" inline></iconify-icon>
+            </button>
+          </a>
+        </div>
+      </section>
+
+      <section style="padding-block: 3rem">
+        <p class="s2-kicker s2-center" style="margin-block-end: 1.5rem">what ships in the box</p>
+        <div class="s2-grid">
+          <div class="s2-card s2-hover s2-feature">
+            <iconify-icon icon="lucide:shopping-cart"></iconify-icon>
+            <h3 style="font-family: var(--s2-body); font-size: 1rem; margin-block: 0.5rem 0.25rem">eCommerce</h3>
+            <p class="s2-quiet s2-small" style="margin: 0">
+              Guest-by-default cart, coupons, in-page payments (no redirect), digital delivery with signed downloads.
+            </p>
+          </div>
+          <div class="s2-card s2-hover s2-feature">
+            <iconify-icon icon="lucide:lock"></iconify-icon>
+            <h3 style="font-family: var(--s2-body); font-size: 1rem; margin-block: 0.5rem 0.25rem">Authentication</h3>
+            <p class="s2-quiet s2-small" style="margin: 0">
+              Sessions, Google OAuth, real TOTP two-factor, verified deletion — all bearer-first for static hosts.
+            </p>
+          </div>
+          <div class="s2-card s2-hover s2-feature">
+            <iconify-icon icon="lucide:search"></iconify-icon>
+            <h3 style="font-family: var(--s2-body); font-size: 1rem; margin-block: 0.5rem 0.25rem">Search + i18n</h3>
+            <p class="s2-quiet s2-small" style="margin: 0">
+              Hybrid lexical+semantic search; English/Arabic with RTL for free — logical properties, no second
+              stylesheet.
+            </p>
+          </div>
+          <div class="s2-card s2-hover s2-feature">
+            <iconify-icon icon="lucide:credit-card"></iconify-icon>
+            <h3 style="font-family: var(--s2-body); font-size: 1rem; margin-block: 0.5rem 0.25rem">Subscriptions</h3>
+            <p class="s2-quiet s2-small" style="margin: 0">
+              Recurring checkout, renew/lapse lifecycle, self-serve customer portal.
+            </p>
+          </div>
+          <div class="s2-card s2-hover s2-feature">
+            <iconify-icon icon="lucide:truck"></iconify-icon>
+            <h3 style="font-family: var(--s2-body); font-size: 1rem; margin-block: 0.5rem 0.25rem">Delivery</h3>
+            <p class="s2-quiet s2-small" style="margin: 0">
+              Neutral delivery contract — download links today; couriers and carriers as drivers tomorrow.
+            </p>
+          </div>
+          <div class="s2-card s2-hover s2-feature">
+            <iconify-icon icon="lucide:mail"></iconify-icon>
+            <h3 style="font-family: var(--s2-body); font-size: 1rem; margin-block: 0.5rem 0.25rem">Forms + CMS</h3>
+            <p class="s2-quiet s2-small" style="margin: 0">
+              A contact form with zero JavaScript, hosted pages with localized siblings.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section style="padding-block: 3rem">
+        <p class="s2-kicker s2-center" style="margin-block-end: 0.25rem">pricing</p>
+        <h2 class="s2-center" style="margin-block: 0 1.5rem">Pay once, own the source</h2>
+        <div class="s2-grid" id="pricing" style="max-inline-size: 52rem; margin-inline: auto">
+          <div class="s2-card s2-hover">
+            <div class="s2-stack" style="block-size: 100%">
+              <h3 style="margin: 0">Frontend Lite</h3>
+              <div class="s2-price" style="font-size: 1.5rem">$0</div>
+              <p class="s2-quiet s2-small" style="flex: 1">This very page — view source, copy, ship.</p>
+              <button class="s2-btn s2-btn-quiet" type="button" disabled>It's this page</button>
+            </div>
+          </div>
+          <div class="s2-card s2-hover" style="--border-color: var(--s2-accent)">
+            <div class="s2-stack" style="block-size: 100%">
+              <h3 style="margin: 0">Backend + Frontend</h3>
+              <div class="s2-price" style="font-size: 1.5rem">$49</div>
+              <p class="s2-quiet s2-small" style="flex: 1">
+                Admin, products, checkout, hosted collections + auth pools.
+              </p>
+              <button class="s2-btn s2-btn-brand" type="button" data-buy="billing-kit">
+                <iconify-icon icon="lucide:plus" inline></iconify-icon>
+                Add to cart
+              </button>
+            </div>
+          </div>
+          <div class="s2-card s2-hover">
+            <div class="s2-stack" style="block-size: 100%">
+              <h3 style="margin: 0">Full Stack Pro</h3>
+              <div class="s2-price" style="font-size: 1.5rem">$149</div>
+              <p class="s2-quiet s2-small" style="flex: 1">Stripe payments, order management, lifetime updates.</p>
+              <button class="s2-btn s2-btn-outline" type="button" data-buy="saastarter2">
+                <iconify-icon icon="lucide:plus" inline></iconify-icon>
+                Add to cart
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="s2-center" style="padding-block: 2rem">
+        <blockquote>
+          <p>"Best template I've used — and it literally sells itself, so I trusted it instantly."</p>
+          <footer class="s2-quiet s2-small">— Emily Park, Indie Developer</footer>
+        </blockquote>
+      </section>
+    </main>
+    <s2-footer>
+      <!-- SYNC: duplicated per page (see the note on <s2-nav>); the fallback
+           copy lives in js/components/footer.js — change one, change both. -->
+      static on GitHub Pages · backend on Cloudflare Workers ·
+      <a href="./contact">contact</a>
+      ·
+      <a href="./blog">blog</a>
+      ·
+      <a href="./admin">admin</a>
+    </s2-footer>
+    <script type="module">
+      import { addToCart } from "./js/store.js";
+      document.getElementById("pricing").addEventListener("click", async (event) => {
+        const slug = event.target.closest?.("[data-buy]")?.dataset?.buy;
+        if (!slug) return;
+        await addToCart(slug);
+        void document.querySelector("s2-cart-drawer")?.show();
+      });
+    </script>
+  </body>
+</html>

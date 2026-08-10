@@ -1,0 +1,573 @@
+/* ==========================================================================
+   saastarter2 — "source-code editorial" site styles
+   Written in 2026 CSS: nesting, logical properties (the reason there is no
+   RTL stylesheet — Arabic flips for free), CSS grid, color-mix, and
+   cross-document View Transitions (the reason there is no client router).
+   Components come from Web Awesome; this file only does layout + voice.
+   ========================================================================== */
+
+/* --- base ---------------------------------------------------------------- */
+body {
+  background: var(--s2-paper);
+  color: var(--s2-ink);
+  margin: 0;
+}
+
+.container {
+  max-inline-size: 60rem;
+  margin-inline: auto;
+  padding-inline: 1rem;
+}
+
+h1,
+h2,
+h3 {
+  font-family: var(--s2-display);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+a {
+  color: var(--s2-accent);
+}
+
+.s2-kicker {
+  font-family: var(--s2-mono);
+  font-size: 0.78rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: color-mix(in srgb, var(--s2-accent) 85%, var(--s2-ink));
+
+  &::before {
+    content: "// ";
+    opacity: 0.6;
+  }
+}
+.s2-comment {
+  font-family: var(--s2-mono);
+  font-size: 0.85rem;
+  color: var(--s2-muted);
+}
+.s2-mono,
+.s2-price,
+code {
+  font-family: var(--s2-mono);
+}
+.s2-price {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+.s2-quiet {
+  color: var(--s2-muted);
+}
+.s2-small {
+  font-size: 0.85rem;
+}
+.s2-center {
+  text-align: center;
+}
+
+/* --- chrome (rendered by <s2-nav>/<s2-footer> custom elements) -----------
+   The elements upgrade when js/chrome.js runs; their boxes are reserved
+   here so the injected chrome never shifts the page (CLS 0). */
+s2-nav {
+  display: block;
+  min-block-size: 63px;
+  border-block-end: 1px solid var(--s2-line);
+
+  & .s2-nav-row {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 0.25rem 1rem;
+    padding-block: 0.6rem;
+  }
+  & .s2-brand {
+    font-family: var(--s2-display);
+    font-weight: 600;
+    font-size: 1.35rem;
+    color: var(--s2-ink);
+    text-decoration: none;
+    margin-inline-end: auto;
+
+    & small {
+      font-family: var(--s2-mono);
+      font-size: 0.6rem;
+      font-weight: 500;
+      background: var(--s2-accent);
+      color: var(--s2-accent-contrast);
+      padding: 0.1em 0.4em;
+      border-radius: var(--wa-border-radius-s);
+      vertical-align: super;
+    }
+  }
+  & a:not(.s2-brand) {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.35rem;
+    color: var(--s2-ink);
+    text-decoration: none;
+    font-size: 0.95rem;
+
+    &:hover {
+      color: var(--s2-accent);
+    }
+  }
+  & .s2-badge {
+    background: var(--s2-accent);
+    color: var(--s2-accent-contrast);
+    font-family: var(--s2-mono);
+    font-size: 0.7rem;
+    border-radius: 999px;
+    padding: 0.05em 0.5em;
+  }
+  & button {
+    background: none;
+    border: 1px solid var(--s2-line);
+    border-radius: var(--wa-border-radius-s);
+    color: var(--s2-ink);
+    padding: 0.25rem 0.5rem;
+    cursor: pointer;
+
+    &:hover {
+      border-color: var(--s2-accent);
+      color: var(--s2-accent);
+    }
+  }
+}
+
+/* The theme toggle shows the right icon with no JS: the boot script sets
+   .dark before first paint, and CSS picks which of the two is visible. */
+.s2-when-dark {
+  display: none;
+}
+.dark .s2-when-dark {
+  display: inline-block;
+}
+.dark .s2-when-light {
+  display: none;
+}
+/* "Sign in" and "Account" differ in width; reserving the wider one stops a
+   horizontal jitter when the session resolves. */
+#nav-account {
+  min-inline-size: 6.5rem;
+}
+
+s2-footer {
+  display: block;
+  /* Measured filled height. Without it the footer grows by one line when
+     JS injects its content — a shift on every page, and the one that
+     showed up on all five in the pre-JS/post-JS diff. */
+  min-block-size: 69px;
+  box-sizing: border-box;
+  border-block-start: 1px solid var(--s2-line);
+  padding-block: 1.5rem;
+  text-align: center;
+  font-family: var(--s2-mono);
+  font-size: 0.78rem;
+  color: var(--s2-muted);
+}
+
+main {
+  padding-block: 1.5rem;
+  /* main fills the viewport below the nav: the footer never jumps into
+     view while async content is still streaming in */
+  min-block-size: calc(100dvh - 63px);
+}
+
+/* --- cards ---------------------------------------------------------------
+   wa-card is the surface; the ink-offset hover is this site's signature. */
+.s2-hover,
+a.s2-card-link > .s2-card {
+  transition:
+    translate 0.15s ease,
+    box-shadow 0.15s ease;
+}
+.s2-hover:hover,
+a.s2-card-link:hover > .s2-card {
+  translate: -2px -2px;
+  box-shadow: 4px 4px 0 var(--s2-ink);
+}
+.dark :is(.s2-hover:hover, a.s2-card-link:hover > .s2-card) {
+  box-shadow: 4px 4px 0 var(--s2-accent);
+}
+a.s2-card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+
+  & .s2-card {
+    block-size: 100%;
+  }
+}
+
+/* --- layout: native grid, no framework ----------------------------------- */
+.s2-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(15rem, 1fr));
+  gap: 1.5rem;
+}
+.s2-stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+.s2-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+}
+.s2-split {
+  display: grid;
+  gap: 2rem;
+  grid-template-columns: 1fr;
+
+  @media (min-width: 48rem) {
+    grid-template-columns: 2fr 3fr;
+  }
+}
+
+/* --- hero: grid paper + stagger reveal ----------------------------------- */
+.s2-hero {
+  position: relative;
+  text-align: center;
+  padding-block: 3.5rem;
+  background-image:
+    linear-gradient(var(--s2-line) 1px, transparent 1px), linear-gradient(90deg, var(--s2-line) 1px, transparent 1px);
+  background-size: 2.5rem 2.5rem;
+  background-position: center;
+  border-block-end: 1px solid var(--s2-line);
+  margin-inline: calc(50% - 50vw);
+  padding-inline: calc(50vw - 50%);
+
+  &::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    background: radial-gradient(ellipse 70% 60% at 50% 40%, transparent 30%, var(--s2-paper) 95%);
+  }
+  & > * {
+    position: relative;
+    z-index: 1;
+  }
+}
+.s2-hero-title {
+  font-size: clamp(3rem, 9vw, 5.75rem);
+  line-height: 0.98;
+  margin-block: 0.5rem;
+
+  & em {
+    font-style: italic;
+    color: var(--s2-accent);
+    font-weight: 500;
+  }
+}
+/* The hero holds the LCP element. An element at opacity:0 is not an LCP
+   candidate, so fading the hero in defers LCP by the whole animation —
+   measured at ~1.8s between FCP and LCP here, with the LCP element being
+   the hero paragraph. The rise is therefore transform-only: same staggered
+   entrance, but the text is painted (and LCP-eligible) immediately. */
+@media (prefers-reduced-motion: no-preference) {
+  .s2-reveal {
+    transform: translateY(14px);
+    animation: s2-up 0.55s ease forwards;
+  }
+  .s2-reveal:nth-child(2) {
+    animation-delay: 0.08s;
+  }
+  .s2-reveal:nth-child(3) {
+    animation-delay: 0.16s;
+  }
+  .s2-reveal:nth-child(4) {
+    animation-delay: 0.24s;
+  }
+  @keyframes s2-up {
+    to {
+      transform: none;
+    }
+  }
+}
+
+/* --- navigation ----------------------------------------------------------
+   js/router.js morphs <main> in the SAME document and wraps the patch in
+   startViewTransition, so matching view-transition-names still morph
+   (product card title → product h1) while the chrome is never destroyed.
+   The @view-transition rule below is the no-JS fallback: without the
+   router, links are plain cross-document navigations and the browser
+   animates those instead. */
+@view-transition {
+  navigation: auto;
+}
+/* The root keeps its default cross-fade. Freezing it (animation: none)
+   turns a cross-document swap into a hard cut, which reads as a blink —
+   and cross-document is now only the no-JS fallback anyway, since
+   js/router.js morphs same-document. */
+::view-transition-group(*) {
+  animation-duration: 200ms;
+  animation-timing-function: cubic-bezier(0.2, 0, 0, 1);
+}
+@media (prefers-reduced-motion: reduce) {
+  ::view-transition-group(*) {
+    animation: none;
+  }
+}
+html {
+  scrollbar-gutter: stable;
+}
+
+/* async content areas reserve their space — sections below never move */
+#grid {
+  min-block-size: 20rem;
+}
+#detail {
+  min-block-size: 24rem;
+}
+#posts {
+  min-block-size: 8rem;
+}
+
+/* --- FOUCE guard: undefined components hold layout, not looks ------------ */
+:where(wa-drawer, wa-tab-group, wa-rating, wa-otp-input, wa-qr-code, s2-search):not(:defined) {
+  visibility: hidden;
+}
+
+/* --- misc ----------------------------------------------------------------- */
+.product-emoji {
+  font-size: 3rem;
+}
+.s2-feature iconify-icon {
+  font-size: 1.5rem;
+  color: var(--s2-accent);
+}
+blockquote {
+  font-family: var(--s2-display);
+  font-style: italic;
+  font-size: 1.25rem;
+  max-inline-size: 34rem;
+  margin-inline: auto;
+}
+.s2-hidden {
+  display: none !important;
+}
+iconify-icon {
+  vertical-align: -0.14em;
+}
+/* The icon element is itself a custom element loaded from a CDN, so before
+   it upgrades it is an empty inline box and everything around it sits
+   differently. 1em square matches what it renders at any font-size. */
+iconify-icon:not(:defined) {
+  display: inline-block;
+  inline-size: 1em;
+  block-size: 1em;
+}
+/* …but the reservation must not out-specify "this icon is hidden", or the
+   theme toggle shows BOTH its icons until the CDN script lands. */
+iconify-icon.s2-when-dark:not(:defined) {
+  display: none;
+}
+.dark iconify-icon.s2-when-light:not(:defined) {
+  display: none;
+}
+
+/* --- headless-component styling (Base UI slider) -------------------------
+   A headless library ships behavior + a11y and NO looks: these four rules
+   are the entire visual layer for <s2-price-slider>. */
+.s2-slider-control {
+  display: flex;
+  align-items: center;
+  inline-size: 100%;
+  block-size: 1.5rem;
+  touch-action: none;
+}
+.s2-slider-track {
+  position: relative;
+  inline-size: 100%;
+  block-size: 0.25rem;
+  border-radius: 999px;
+  background: var(--s2-line);
+}
+.s2-slider-indicator {
+  position: absolute;
+  inset-block: 0;
+  border-radius: 999px;
+  background: var(--s2-accent);
+}
+.s2-slider-thumb {
+  inline-size: 1rem;
+  block-size: 1rem;
+  border-radius: 50%;
+  background: var(--s2-accent);
+  border: 2px solid var(--s2-paper);
+  box-shadow: 0 0 0 1px var(--s2-line);
+}
+.s2-slider-thumb:focus-visible {
+  outline: 2px solid var(--s2-accent);
+  outline-offset: 2px;
+}
+
+/* --- motion lab (lab.html) — tier-1 applier ------------------------------
+   The sweep is pure CSS reading one custom property, so the compositor
+   owns it. js/lab-motion.js writes --progress; nothing else is needed. */
+.s2-motion-host {
+  --progress: 0;
+  position: relative;
+  padding: 1rem;
+  border: 1px solid var(--s2-line);
+  border-radius: var(--wa-border-radius-m);
+  -webkit-mask-image: linear-gradient(
+    100deg,
+    #000 calc(var(--progress) * 160% - 30%),
+    color-mix(in srgb, #000 35%, transparent) calc(var(--progress) * 160% - 8%),
+    #000 calc(var(--progress) * 160% + 14%)
+  );
+  mask-image: linear-gradient(
+    100deg,
+    #000 calc(var(--progress) * 160% - 30%),
+    color-mix(in srgb, #000 35%, transparent) calc(var(--progress) * 160% - 8%),
+    #000 calc(var(--progress) * 160% + 14%)
+  );
+}
+@media (prefers-reduced-motion: reduce) {
+  .s2-motion-host {
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+}
+
+/* --- FOUCE: reserve the box BEFORE a custom element upgrades ------------
+   `:not(:defined)` elements are inline and zero-height until their class
+   registers, so everything below them jumps when it does. Measured with
+   `./cli.sh nojs-diff` — each rule corresponds to an element that showed up
+   there. Heights only, and only where the final height is predictable:
+   pinning a width would trade a vertical shift for a horizontal one. */
+s2-search:not(:defined),
+wa-input:not(:defined) {
+  display: block;
+  min-block-size: 43px; /* measured upgraded height */
+}
+wa-tab-group:not(:defined) {
+  display: block;
+  min-block-size: 20rem;
+}
+
+/* ==========================================================================
+   Tier-1 primitives: card, button, badge as plain HTML + CSS
+   --------------------------------------------------------------------------
+   These exist so the page is COMPLETE before any JavaScript runs. A card is
+   a bordered box and a button is a styled control — neither needs a custom
+   element, and using one means the element is inert (and the layout wrong)
+   until its class registers. Web Awesome is still the right answer for
+   genuinely interactive widgets: drawer, tab-group, rating, otp-input,
+   qr-code, markdown. It is the wrong answer for a box with a border.
+
+   Every value below is a token, so theming and dark mode are unchanged.
+   ========================================================================== */
+.s2-card {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  padding: 1.25rem;
+  background: var(--s2-card);
+  color: var(--s2-ink);
+  border: 1px solid var(--s2-line);
+  border-radius: var(--wa-border-radius-m, 6px);
+}
+
+.s2-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  padding-inline: 1.25rem;
+  block-size: 2.7rem;
+  border: 1px solid transparent;
+  border-radius: var(--wa-border-radius-s, 4px);
+  font: inherit;
+  font-weight: 500;
+  line-height: 1;
+  text-decoration: none;
+  cursor: pointer;
+  background: var(--wa-color-neutral-fill-quiet, var(--s2-line));
+  color: var(--s2-ink);
+  transition:
+    background-color 0.12s ease,
+    border-color 0.12s ease;
+
+  &:hover {
+    border-color: var(--s2-accent);
+  }
+  &:focus-visible {
+    outline: 2px solid var(--s2-accent);
+    outline-offset: 2px;
+  }
+  &[disabled],
+  &[aria-disabled="true"] {
+    opacity: 0.5;
+    pointer-events: none;
+  }
+}
+.s2-btn-brand {
+  background: var(--s2-accent);
+  color: var(--s2-accent-contrast);
+  border-color: var(--s2-accent);
+
+  &:hover {
+    background: color-mix(in oklab, var(--s2-accent) 88%, black);
+  }
+}
+.s2-btn-outline {
+  background: transparent;
+  color: var(--s2-accent);
+  border-color: var(--s2-accent);
+
+  &:hover {
+    background: color-mix(in oklab, var(--s2-accent) 10%, transparent);
+  }
+}
+.s2-btn-quiet {
+  background: transparent;
+  color: var(--s2-ink);
+  border-color: var(--s2-line);
+}
+.s2-btn-plain {
+  background: transparent;
+  border-color: transparent;
+  padding-inline: 0.4rem;
+  color: var(--s2-ink);
+}
+.s2-btn-danger {
+  color: var(--wa-color-danger-fill-loud, #b3261e);
+  border-color: currentcolor;
+  background: transparent;
+}
+.s2-btn-s {
+  block-size: 2.15rem;
+  padding-inline: 0.85rem;
+  font-size: 0.9rem;
+}
+.s2-btn-l {
+  block-size: 3.3rem;
+  padding-inline: 1.6rem;
+  font-size: 1.15rem;
+}
+
+.s2-tag {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.15em 0.6em;
+  border-radius: 999px;
+  font-size: 0.75rem;
+  font-weight: 500;
+  background: var(--wa-color-neutral-fill-quiet, var(--s2-line));
+  color: var(--s2-ink);
+}
+.s2-tag-brand {
+  background: var(--s2-accent);
+  color: var(--s2-accent-contrast);
+}
+.s2-tag-success {
+  background: var(--wa-color-success-fill-loud, #276749);
+  color: #fff;
+}

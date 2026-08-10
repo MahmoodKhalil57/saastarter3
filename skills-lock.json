@@ -1,0 +1,23 @@
+{
+  "version": 1,
+  "skills": {
+    "hono-aep-baas-client": {
+      "source": "MahmoodKhalil57/hono-aep-baas",
+      "sourceType": "github",
+      "skillPath": "skills/client/SKILL.md",
+      "computedHash": "e2d57ed57bc67f8e431ba631d40db080876adab47c04fbdd46292c8e3c1ca85f"
+    },
+    "hono-aep-design-embed": {
+      "source": "MahmoodKhalil57/hono-aep-design-embed-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "587cee055d4bfc9a65703680faa4f84cb26ce551f29e87c5bbc8298d7bf2b17c"
+    },
+    "hono-aep-frontend": {
+      "source": "MahmoodKhalil57/hono-aep-frontend-skill",
+      "sourceType": "github",
+      "skillPath": "SKILL.md",
+      "computedHash": "811ba720d7b4762296b00e962493d4de125c942c9a17b05851b955b2297e2378"
+    }
+  }
+}

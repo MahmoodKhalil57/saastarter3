@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <script>
+      // Old SPA-route compatibility: /products/x → product?slug=x, etc.
+      const parts = location.pathname
+        .replace(/^\/saastarter2\/?/, "")
+        .split("/")
+        .filter(Boolean);
+      const [head, tail] = parts;
+      const map = {
+        products: tail ? `product?slug=${encodeURIComponent(tail)}` : "products",
+        blog: tail ? `post?id=${encodeURIComponent(tail)}` : "blog",
+        changelog: "blog",
+        cart: "#cart",
+        login: "login",
+        account: "account" + location.search,
+        admin:
+          "https://mizan-gpp.the-montiapple.workers.dev/v1/projects/saastarter3/site/admin.html",
+        contact: "contact",
+      };
+      location.replace("/saastarter2/" + (map[head] ?? (head ? `page?slug=${encodeURIComponent(head)}` : "")));
+    </script>
+  </head>
+  <body>
+    Redirecting…
+  </body>
+</html>
